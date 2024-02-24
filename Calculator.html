@@ -1,76 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="Calculator.css">
-    <script src="Calculator.js"></script>
-    <title>Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The HTML Calculator</title>
     <style>
         .calculator {
-            width: 200px;
-            padding: 10px;
-            background-color: #f4f4f4;
-            border: 1px solid #ccc;
+            width: 250px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #000000;
+            border-radius: 5px;
+            text-align: center;
+            background-color: #153058;
         }
-        .calculator input[type="number"],
-        .calculator button {
-            width: 100%;
-            margin-bottom: 5px;
+        input[type="text"] {
+            width: 92%;
+            margin-bottom: 10px;
             padding: 5px;
+            font-size: 18px;
+            color: black;
+            background-color: whitesmoke;
         }
-        .calculator button {
-            background-color: #ddd;
-            border: none;
+        input[type="button"] {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            font-size: 20px;
+            border-radius: 5px;
             cursor: pointer;
+            background-color: #9d9d9d;
         }
     </style>
 </head>
 <body>
+
 <div class="calculator">
-    <input id="operand1" type="number" placeholder="Operand 1">
-    <input id="operand2" type="number" placeholder="Operand 2">
-    <button id="add">+</button>
-    <button id="subtract">-</button>
-    <button id="multiply">*</button>
-    <button id="divide">/</button>
-    <div id="result"></div>
+    <input type="text" id="result" disabled><br>
+    <div class="number buttons">
+        <input type="button" value="9" onclick="addToDisplay('9')">
+        <input type="button" value="8" onclick="addToDisplay('8')">
+        <input type="button" value="7" onclick="addToDisplay('7')">
+        <input type="button" value="6" onclick="addToDisplay('6')">
+        <input type="button" value="5" onclick="addToDisplay('5')">
+        <input type="button" value="4" onclick="addToDisplay('4')">
+        <input type="button" value="3" onclick="addToDisplay('3')">
+        <input type="button" value="2" onclick="addToDisplay('2')">
+        <input type="button" value="1" onclick="addToDisplay('1')">
+        <input type="button" value="0" onclick="addToDisplay('0')">
+    </div>
+    <div class="operand-buttons">
+        <input type="button" value="+" onclick="addToDisplay('+')">
+        <input type="button" value="-" onclick="addToDisplay('-')">
+        <input type="button" value="*" onclick="addToDisplay('*')">
+        <input type="button" value="/" onclick="addToDisplay('/')">
+        <input type="button" value="C" onclick="clearDisplay()">
+        <input type="button" value="=" onclick="calculate()">
+    </div>
 </div>
+<p align="center">Ish's HTML Calculator</p>
+<hr>
+<a href="https://github.com/ishtiaqa1" target="_blank">
+    <img src="github.png" style="width:42px;height:42px;">
+</a>
+<a href="https://www.linkedin.com/in/ishtiaq-akanda-86b96a267/" target="_blank">
+    <img src="linkedin.png" style="width:110px;height:42px;">
+</a>
 
 <script>
-    // Calculator logic
-    const operand1Input = document.getElementById('operand1');
-    const operand2Input = document.getElementById('operand2');
-    const addButton = document.getElementById('add');
-    const subtractButton = document.getElementById('subtract');
-    const multiplyButton = document.getElementById('multiply');
-    const divideButton = document.getElementById('divide');
-    const resultDiv = document.getElementById('result');
+    function addToDisplay(value) {
+        document.getElementById('result').value += value;
+    }
 
-    addButton.addEventListener('click', calculate);
-    subtractButton.addEventListener('click', calculate);
-    multiplyButton.addEventListener('click', calculate);
-    divideButton.addEventListener('click', calculate);
+    function clearDisplay() {
+        document.getElementById('result').value = '';
+    }
 
-    function calculate(event) {
-        const operand1 = Number(operand1Input.value);
-        const operand2 = Number(operand2Input.value);
-        let result;
-
-        switch (event.target.id) {
-            case 'add':
-                result = operand1 + operand2;
-                break;
-            case 'subtract':
-                result = operand1 - operand2;
-                break;
-            case 'multiply':
-                result = operand1 * operand2;
-                break;
-            case 'divide':
-                result = operand1 / operand2;
-                break;
-        }
-
-        resultDiv.textContent = `Result: ${result}`;
+    function calculate() {
+        var expression = document.getElementById('result').value;
+        var result = eval(expression);
+        document.getElementById('result').value = result;
     }
 </script>
 </body>
